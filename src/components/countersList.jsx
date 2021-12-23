@@ -23,10 +23,35 @@ const CountersList = () => {
     setCounters(initialState);
   };
 
+  const handleIncrement = (id) => {
+    let newValues = counters.map((counter) => {
+      if (counter.id === id) {
+        counter.value++;
+      }
+      return counter;
+    });
+    setCounters(newValues);
+  };
+  const handleDecrement = (id) => {
+    let newValues = counters.map((counter) => {
+      if (counter.id === id) {
+        counter.value--;
+      }
+      return counter;
+    });
+    setCounters(newValues);
+  };
+
   return (
     <>
       {counters.map((count) => (
-        <Counter key={count.id} {...count} onDelete={handleDelete} />
+        <Counter
+          key={count.id}
+          {...count}
+          onDelete={handleDelete}
+          onIncrement={handleIncrement}
+          onDecrement={handleDecrement}
+        />
       ))}
       <button className="btn btn-primary btn-sm m-2" onClick={handelReset}>
         Reset
